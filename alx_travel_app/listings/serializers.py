@@ -1,3 +1,3 @@
-Set Up Serializers:
+#Set Up Serializers:
 
-Create serializers in listings/serializers.py for Listing and Booking models.
+#Create serializers in listings/serializers.py for Listing and Booking models.
