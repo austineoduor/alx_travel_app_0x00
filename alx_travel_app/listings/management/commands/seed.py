@@ -38,4 +38,4 @@ class Command(BaseCommand):
                     comment="This is a sample review."
                 )
                 Review.append(review)
-                self.stdout.write(f"Created review for {listing.title} by {user.username}")
+                self.stdout.write(f"Created review for {listing.title} by {get_user_model.username}")
