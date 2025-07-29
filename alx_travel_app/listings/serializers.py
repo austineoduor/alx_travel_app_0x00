@@ -3,7 +3,20 @@
 #Create serializers in listings/serializers.py for Listing and Booking models.
 
 from rest_framework import serializers
-from .models import Listing, Booking
+from .models import  Listing, Booking, User
+
+
+class UserSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(max_length=255, required=False, read_only=True)
+    last_name = serializers.CharField(max_length=255, required=False, read_only=True)
+    class Meta:
+        model = User
+        fields = ('user_id', 'username', 'email', 'first_name',
+                  'phone_number', 'password', 'last_name'
+                  )
+        read_only_fields = ('user_id','password','phone_number',\
+                            'last_name','first_name',
+                            )  # Prevent ID modification
 
 class ListingSerializer(serializers.ModelSerializer):
     id = serializers.UUIDField(read_only=True)
@@ -23,7 +36,7 @@ class ListingSerializer(serializers.ModelSerializer):
         }
 
 class BookingSerializer(serializers.ModelSerializer):
-        listings = ListingSerializer(many=True, read_only=True)
+        # listings = ListingSerializer(many=True, read_only=True)
         user_id = serializers.PrimaryKeyRelatedField(
             read_only=True, source='user_id.username')
         property_id = serializers.PrimaryKeyRelatedField
